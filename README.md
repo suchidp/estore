@@ -1,1 +1,1 @@
-# E_Store
+inventoryService
