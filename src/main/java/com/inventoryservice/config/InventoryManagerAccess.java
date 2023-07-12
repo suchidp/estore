@@ -1,4 +1,5 @@
 package com.inventoryservice.config;
+
 import org.springframework.security.access.prepost.PreAuthorize;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -7,7 +8,6 @@ import java.lang.annotation.Target;
 
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
-@PreAuthorize("hasAuthority('ROLE_ADMIN') ")
-public @interface PermitAdmin {
+@PreAuthorize("hasAuthority('ROLE_INVENTORYMANAGER')")
+public @interface InventoryManagerAccess {
 }
-

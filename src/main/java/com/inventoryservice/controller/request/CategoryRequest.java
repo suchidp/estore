@@ -2,14 +2,15 @@ package com.inventoryservice.controller.request;
 
 import com.inventoryservice.model.Category;
 import com.inventoryservice.model.SubCategory;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
-
+import lombok.Setter;
 import java.time.LocalDateTime;
 import java.util.List;
 
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
 public class CategoryRequest {
     private String categoryName;
     private LocalDateTime createdOn;
@@ -17,13 +18,13 @@ public class CategoryRequest {
     private boolean isArchived;
     private List<SubCategory> subcategories;
 
-    public static Category toEntity(CategoryRequest categoryRequest) {
-        Category entity = new Category();
-        entity.setCategoryName(categoryRequest.getCategoryName());
-        entity.setCreatedOn(categoryRequest.getCreatedOn());
-        entity.setLastUpdatedOn(categoryRequest.getLastUpdatedOn());
-        entity.setArchived(categoryRequest.isArchived());
-        entity.setSubcategories(categoryRequest.getSubcategories());
-        return entity;
+    public static Category toCategory(CategoryRequest categoryRequest) {
+        Category category = new Category();
+        category.setCategoryName(categoryRequest.getCategoryName());
+        category.setCreatedOn(categoryRequest.getCreatedOn());
+        category.setLastUpdatedOn(categoryRequest.getLastUpdatedOn());
+        category.setArchived(categoryRequest.isArchived());
+        category.setSubcategories(categoryRequest.getSubcategories());
+        return category;
     }
 }

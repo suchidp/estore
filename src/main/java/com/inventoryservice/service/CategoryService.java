@@ -6,6 +6,7 @@ import com.inventoryservice.repository.CategoryRepository;
 import com.inventoryservice.repository.SubCategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -31,7 +32,7 @@ public class CategoryService {
 
     /*
      *The method used to  get the Category by Using  categoryId.*/
-    public Category findCategoryById(int categoryId) {
+    public Category findCategoryById(Integer categoryId) {
         Optional<Category> category = categoryRepository.findById(categoryId);
         return category.orElse(null);
     }
@@ -40,24 +41,17 @@ public class CategoryService {
    The method used to  delete the Category.
    This method check Category is present or not   .
    */
-    public Category deleteCategory(int categoryId) {
+    public Category deleteCategory(Integer categoryId) {
         Category category = categoryRepository.findById(categoryId).get();
-        if (!category.isArchived()) ;
-        {
-            category.setArchived(true);
-            for (SubCategory subCategory : category.getSubcategories()) {
-                subCategory.setArchived(true);
-                subcategoryRepository.save(subCategory);
-            }
-            return categoryRepository.save(category);
+        category.setArchived(true);
+        for (SubCategory subCategory : category.getSubcategories()) {
+            subCategory.setArchived(true);
+            subcategoryRepository.save(subCategory);
         }
+        return categoryRepository.save(category);
     }
 
-    public List<SubCategory> getSubCategoriesByCategoryId(int categoryId) {
-        return subcategoryRepository.findByCategoryCategoryId(categoryId);
-    }
-
-    public Category updateCategory(int categoryId, Category category) {
+    public Category updateCategory(Integer categoryId, Category category) {
         Optional<Category> categories = categoryRepository.findById(categoryId);
         Category newCategory = categories.get();
         newCategory.setCategoryName(category.getCategoryName());

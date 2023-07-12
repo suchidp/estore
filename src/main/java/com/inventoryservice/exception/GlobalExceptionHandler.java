@@ -17,6 +17,19 @@ import java.util.stream.Collectors;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
+    @ExceptionHandler(com.inventoryservice.exception.CategoryArchivedException.class)
+    public ResponseEntity<ExceptionResponse> categoryArchivedException(Exception ex, WebRequest request) {
+        ExceptionResponse exceptionResponse =
+                new ExceptionResponse(ex.getMessage());
+        return new ResponseEntity<>(exceptionResponse, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(com.inventoryservice.exception.SubCategoryArchivedException.class)
+    public ResponseEntity<ExceptionResponse> subCategoryArchivedException(Exception ex, WebRequest request) {
+        ExceptionResponse exceptionResponse =
+                new ExceptionResponse(ex.getMessage());
+        return new ResponseEntity<>(exceptionResponse, HttpStatus.NOT_FOUND);
+    }
     /*Exception Handling for SubCategoryNotFoundException
     Using SubCategoryNotFoundException ,to check subCategory is find or Not for given subCategoryId
     * @param ex SubCategoryNotFoundException exception to handle

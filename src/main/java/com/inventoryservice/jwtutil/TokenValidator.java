@@ -18,12 +18,12 @@ import java.io.IOException;
 
 @Order(1)
 @Component
-public class IsTokenValidFilter extends OncePerRequestFilter {
+public class TokenValidator extends OncePerRequestFilter {
 
     private final AuthClient authClient;
 
     @Autowired
-    public IsTokenValidFilter(AuthClient authClient) {
+    public TokenValidator(AuthClient authClient) {
         this.authClient = authClient;
     }
 

@@ -1,6 +1,6 @@
 package com.inventoryservice.config;
 
-import com.inventoryservice.jwtutil.IsTokenValidFilter;
+import com.inventoryservice.jwtutil.TokenValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,9 +17,9 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig {
 
     @Autowired
-    private IsTokenValidFilter isTokenValidFilter;
+    private TokenValidator isTokenValidFilter;
 
-    public SecurityConfig(IsTokenValidFilter isTokenValidFilter) {
+    public SecurityConfig(TokenValidator isTokenValidFilter) {
         this.isTokenValidFilter = isTokenValidFilter;
     }
 
@@ -27,9 +27,8 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.csrf().disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/category/**").permitAll()
                 .and()
-                .authorizeHttpRequests().requestMatchers("/")
+                .authorizeHttpRequests().requestMatchers("/category/**")
                 .authenticated().and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
